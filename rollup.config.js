@@ -3,7 +3,7 @@
  * @Author: Chengbotao
  * @Date: 2020-11-04 11:00:44
  * @LastEditors: Chengbotao
- * @LastEditTime: 2020-11-05 15:41:35
+ * @LastEditTime: 2020-11-05 16:26:36
  * @FilePath: \bee-design-react\rollup.config.js
  */
 
@@ -13,7 +13,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import babel from 'rollup-plugin-babel';
-import tslint from "rollup-plugin-tslint";
 
 const options = {
   input: 'src/index.tsx',
@@ -31,7 +30,7 @@ const options = {
     plugins: [terser()]
   }],
   external: ['react', 'react-dom'],
-  plugins: [resolve(), commonjs(), babel(), tslint(), typescript()]
+  plugins: [resolve(), commonjs(), babel(), typescript()]
 };
 
 export default options;
