@@ -2,7 +2,7 @@
  * @Author: Chengbotao
  * @Description: 
  * @Date: 2020-11-07 22:30:17
- * @LastEditTime: 2020-11-08 00:07:55
+ * @LastEditTime: 2020-11-19 00:26:14
  * @LastEditors: Chengbotao
  * @FilePath: \bee-design-react\.storybook\main.js
  */
@@ -25,6 +25,14 @@ module.exports = {
         allowSyntheticDefaultImports: false,
         esModuleInterop: false,
       },
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop, component) => {
+        if (prop.parent) {
+          return !prop.parent.fileName.includes("node_modules");
+        }
+
+        return true;
+      }
     }
   }
 }
