@@ -7,3 +7,6 @@ yarn.lock
 # dist
 dist
 stories_static
+
+# coverage
+coverage

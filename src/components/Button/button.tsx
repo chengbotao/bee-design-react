@@ -9,7 +9,7 @@ interface BaseButtonProps {
   disabled?: boolean;
   size?: ButtonSize;
   btnType?: ButtonType;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 /**
@@ -17,11 +17,17 @@ interface BaseButtonProps {
  * @param {type} 
  * @return: 
  */
-type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>;
-type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>;
+type NativeButtonProps = ButtonHTMLAttributes<HTMLElement>;
+type NativeAnchorProps = AnchorHTMLAttributes<HTMLElement>;
 
-export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
+export type ButtonProps = BaseButtonProps & Partial<NativeButtonProps & NativeAnchorProps>
 
+/**
+ * ### 引用方法
+ * ~~~js
+ * import { Button } from "beeDesign"
+ * ~~~
+ */
 export const Button: FC<ButtonProps> = (props) => {
   const { className, disabled, size, btnType, children, style, ...restProps } = props;
 
