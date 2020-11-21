@@ -1,6 +1,13 @@
 import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 import classNames from "classnames";
-interface BaseButtonProps {
+
+export type ButtonSize = "lg" | "sm";
+export type ButtonType = "primary" | "default" | "danger" | "link";
+
+type NativeButtonProps = ButtonHTMLAttributes<HTMLElement>;
+type NativeAnchorProps = AnchorHTMLAttributes<HTMLElement>;
+
+export interface ButtonProps extends Partial<NativeButtonProps & NativeAnchorProps> {
   /** 自定义 css 类名 */
   className?: string;
   /** 是否禁用 */
@@ -11,14 +18,6 @@ interface BaseButtonProps {
   btnType?: ButtonType;
   children?: React.ReactNode;
 }
-
-export type ButtonSize = "lg" | "sm";
-export type ButtonType = "primary" | "default" | "danger" | "link";
-
-type NativeButtonProps = ButtonHTMLAttributes<HTMLElement>;
-type NativeAnchorProps = AnchorHTMLAttributes<HTMLElement>;
-
-export type ButtonProps = BaseButtonProps & Partial<NativeButtonProps & NativeAnchorProps>
 
 /**
  * ### 引用方法
