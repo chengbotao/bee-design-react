@@ -1,21 +1,21 @@
 import React, { FC, ReactElement, InputHTMLAttributes, ChangeEvent } from "react";
 import classNames from "classnames";
-import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import Icon from "../Icon/icon";
+// import { IconProp } from "@fortawesome/fontawesome-svg-core"
+// import Icon from "../Icon/icon";
 
 type InputSize = "lg" | "sm";
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
   disabled?: boolean;
   size?: InputSize;
-  icon?: IconProp;
+  // icon?: IconProp;
   prepend?: string | ReactElement;
   append?: string | ReactElement;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input: FC<InputProps> = (props) => {
-  const { className, style, disabled, size, icon, prepend, append, ...restProps } = props;
+  const { className, style, disabled, size, prepend, append, ...restProps } = props;
   const classes = classNames("input-wrapper", className, {
     [`input-size-${size}`]: size,
     "is-disabled": disabled,
@@ -38,7 +38,7 @@ export const Input: FC<InputProps> = (props) => {
   return (
     <div className={classes} style={style}>
       {prepend && <div className="input-group-prepend">{prepend}</div>}
-      {icon && <div className="icon-wrapper"><Icon icon={icon} title={`title-${icon}`} /></div>}
+      {/* {icon && <div className="icon-wrapper"><Icon icon={icon} title={`title-${icon}`} /></div>} */}
       <input
         className="input-inner"
         disabled={disabled}
