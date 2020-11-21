@@ -11,7 +11,8 @@ const defaultButton = () => (
 )
 const buttonWithSize = () => (
   <>
-    <Button size="lg"> large button</Button>
+    <Button>default button</Button>
+    <Button size="lg">large button</Button>
     <Button size="sm">small button</Button>
   </>
 )
@@ -23,8 +24,15 @@ const buttonWithType = () => (
     <Button btnType="primary">primary button</Button>
   </>
 )
+const buttonWithDisabled = () => (
+  <>
+    <Button disabled>default button</Button>
+    <Button btnType="link" disabled>link button</Button>
+  </>
+)
 
 storiesOf("Button<按钮>", module)
   .add("Button", defaultButton)
   .add("不同尺寸的 Button", buttonWithSize)
   .add("不同类型的 Button", buttonWithType)
+  .add("禁用状态的 button", buttonWithDisabled)

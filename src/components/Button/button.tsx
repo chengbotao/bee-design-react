@@ -1,22 +1,20 @@
 import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 import classNames from "classnames";
-
-export type ButtonSize = "lg" | "sm";
-export type ButtonType = "primary" | "default" | "danger" | "link";
-
 interface BaseButtonProps {
+  /** 自定义 css 类名 */
   className?: string;
+  /** 是否禁用 */
   disabled?: boolean;
+  /** 按钮大小 */
   size?: ButtonSize;
+  /** 按钮类型 */
   btnType?: ButtonType;
   children?: React.ReactNode;
 }
 
-/**
- * @description: HTML button a 默认属性
- * @param {type} 
- * @return: 
- */
+export type ButtonSize = "lg" | "sm";
+export type ButtonType = "primary" | "default" | "danger" | "link";
+
 type NativeButtonProps = ButtonHTMLAttributes<HTMLElement>;
 type NativeAnchorProps = AnchorHTMLAttributes<HTMLElement>;
 
