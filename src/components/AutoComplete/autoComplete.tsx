@@ -6,10 +6,10 @@ import Transition from "../Transition/transition"
 import useDebounce from '../../hooks/useDebounce'
 import useClickOutside from '../../hooks/useClickOutside'
 
-interface DataSourceType {
-  value: string;
-}
-
+interface DataSourceObject {
+  value: string
+};
+export type DataSourceType<T = {}> = T & DataSourceObject;
 export interface AutoCompleteProps extends Omit<InputProps, "onSelect"> {
   fetchSuggestions?: (keyword: string) => DataSourceType[] | Promise<DataSourceType[]>;
   onSelect?: (item: DataSourceType) => void;
@@ -73,7 +73,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    switch (e.keyCode) {
+    switch (e.keyCode || e.code) {
       case 13:
         if (suggestions[highlightIndex]) {
           handleSelect(suggestions[highlightIndex])
