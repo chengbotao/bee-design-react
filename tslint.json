@@ -2,5 +2,18 @@
   "extends": [
     "tslint-config-standard",
     "tslint-config-prettier"
-  ]
+  ],
+  "rules": {
+    "semicolon": [
+      true,
+      "always",
+      "ignore-interfaces"
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "jsx-double",
+      "avoid-escape"
+    ]
+  }
 }
