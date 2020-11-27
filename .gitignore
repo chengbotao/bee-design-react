@@ -1,0 +1,12 @@
+# node_nodules
+node_modules
+
+# *.lock
+yarn.lock
+
+# dist
+dist
+stories_static
+
+# coverage
+coverage
