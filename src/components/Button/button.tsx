@@ -1,13 +1,14 @@
-import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
-import classNames from "classnames";
+import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react';
+import classNames from 'classnames';
 
-export type ButtonSize = "lg" | "sm";
-export type ButtonType = "primary" | "default" | "danger" | "link";
+export type ButtonSize = 'lg' | 'sm';
+export type ButtonType = 'primary' | 'default' | 'danger' | 'link';
 
 type NativeButtonProps = ButtonHTMLAttributes<HTMLElement>;
 type NativeAnchorProps = AnchorHTMLAttributes<HTMLElement>;
 
-export interface ButtonProps extends Partial<NativeButtonProps & NativeAnchorProps> {
+export interface ButtonProps
+  extends Partial<NativeButtonProps & NativeAnchorProps> {
   /** 自定义 css 类名 */
   className?: string;
   /** 是否禁用 */
@@ -26,25 +27,29 @@ export interface ButtonProps extends Partial<NativeButtonProps & NativeAnchorPro
  * ~~~
  */
 export const Button: FC<ButtonProps> = (props) => {
-  const { className, disabled, size, btnType, children, style, ...restProps } = props;
+  const {
+    className,
+    disabled,
+    size,
+    btnType,
+    children,
+    style,
+    ...restProps
+  } = props;
 
   // 添加 class: btn, [btn-lg, btn-primary]
-  const classes = classNames("btn", className, {
+  const classes = classNames('btn', className, {
     [`btn-${size}`]: size,
     [`btn-${btnType}`]: btnType,
-    "disabled": (btnType === "link") && disabled
+    disabled: btnType === 'link' && disabled,
   });
 
-  if (btnType === "link") {
+  if (btnType === 'link') {
     return (
-      <a
-        className={classes}
-        style={style}
-        {...restProps}
-      >
+      <a className={classes} style={style} {...restProps}>
         {children}
       </a>
-    )
+    );
   } else {
     return (
       <button
@@ -55,13 +60,13 @@ export const Button: FC<ButtonProps> = (props) => {
       >
         {children}
       </button>
-    )
+    );
   }
-}
+};
 
 Button.defaultProps = {
   disabled: false,
-  btnType: "default"
-}
+  btnType: 'default',
+};
 
 export default Button;

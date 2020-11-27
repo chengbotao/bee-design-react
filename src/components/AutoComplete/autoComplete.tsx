@@ -1,21 +1,30 @@
-import React, { FC, useState, ChangeEvent, KeyboardEvent, ReactElement, useEffect, useRef } from "react";
-import classNames from "classnames";
-import Input, { InputProps } from "../Input/input"
-import Icon from "../Icon/icon"
-import Transition from "../Transition/transition"
-import useDebounce from '../../hooks/useDebounce'
-import useClickOutside from '../../hooks/useClickOutside'
+import React, {
+  FC,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  ReactElement,
+  useEffect,
+  useRef,
+} from 'react';
+import classNames from 'classnames';
+import Input, { InputProps } from '../Input/input';
+import Icon from '../Icon/icon';
+import Transition from '../Transition/transition';
+import useDebounce from '../../hooks/useDebounce';
+import useClickOutside from '../../hooks/useClickOutside';
 
 interface DataSourceObject {
-  value: string
-};
+  value: string;
+}
 export type DataSourceType<T = {}> = T & DataSourceObject;
-export interface AutoCompleteProps extends Omit<InputProps, "onSelect"> {
-  fetchSuggestions?: (keyword: string) => DataSourceType[] | Promise<DataSourceType[]>;
+export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
+  fetchSuggestions?: (
+    keyword: string
+  ) => DataSourceType[] | Promise<DataSourceType[]>;
   onSelect?: (item: DataSourceType) => void;
   renderOption?: (item: DataSourceType) => ReactElement;
 }
-
 
 export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   const {
@@ -25,120 +34,128 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
     value,
     renderOption,
     ...restProps
-  } = props
+  } = props;
 
-  const classes = classNames("auto-complete", className)
+  const classes = classNames('auto-complete', className);
 
   const [inputValue, setInputValue] = useState(value as string);
   const [suggestions, setSuggestions] = useState<DataSourceType[]>([]);
   const [loading, setLoading] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false)
-  const [highlightIndex, setHighlightIndex] = useState(-1)
-  const triggerSearch = useRef(false)
-  const componentRef = useRef<HTMLDivElement>(null)
-  const debouncedValue = useDebounce(inputValue, 300)
-  useClickOutside(componentRef, () => { setSuggestions([]) })
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [highlightIndex, setHighlightIndex] = useState(-1);
+  const triggerSearch = useRef(false);
+  const componentRef = useRef<HTMLDivElement>(null);
+  const debouncedValue = useDebounce(inputValue, 300);
+  useClickOutside(componentRef, () => {
+    setSuggestions([]);
+  });
   useEffect(() => {
     if (debouncedValue && triggerSearch.current) {
-      setSuggestions([])
-      const results = fetchSuggestions && fetchSuggestions(debouncedValue)
+      setSuggestions([]);
+      const results = fetchSuggestions && fetchSuggestions(debouncedValue);
       if (results instanceof Promise) {
-        setLoading(true)
+        setLoading(true);
         // tslint:disable-next-line: no-floating-promises
-        results.then(data => {
-          setLoading(false)
-          setSuggestions(data)
+        results.then((data) => {
+          setLoading(false);
+          setSuggestions(data);
           if (data.length > 0) {
-            setShowDropdown(true)
+            setShowDropdown(true);
           }
-        })
+        });
       } else {
-        setSuggestions(results!)
-        setShowDropdown(true)
+        setSuggestions(results!);
+        setShowDropdown(true);
         if (results!.length > 0) {
-          setShowDropdown(true)
+          setShowDropdown(true);
         }
       }
     } else {
-      setShowDropdown(false)
+      setShowDropdown(false);
     }
-    setHighlightIndex(-1)
-  }, [debouncedValue, fetchSuggestions])
+    setHighlightIndex(-1);
+  }, [debouncedValue, fetchSuggestions]);
 
   const highlight = (index: number) => {
-    if (index < 0) index = 0
+    if (index < 0) index = 0;
     if (index >= suggestions.length) {
-      index = suggestions.length - 1
+      index = suggestions.length - 1;
     }
-    setHighlightIndex(index)
-  }
+    setHighlightIndex(index);
+  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     // tslint:disable-next-line: deprecation
     switch (e.keyCode) {
       case 13:
         if (suggestions[highlightIndex]) {
-          handleSelect(suggestions[highlightIndex])
+          handleSelect(suggestions[highlightIndex]);
         }
-        break
+        break;
       case 38:
-        highlight(highlightIndex - 1)
-        break
+        highlight(highlightIndex - 1);
+        break;
       case 40:
-        highlight(highlightIndex + 1)
-        break
+        highlight(highlightIndex + 1);
+        break;
       case 27:
-        setShowDropdown(false)
-        break
+        setShowDropdown(false);
+        break;
       default:
-        break
+        break;
     }
-  }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.trim()
-    setInputValue(value)
-    triggerSearch.current = true
-  }
+    const value = e.target.value.trim();
+    setInputValue(value);
+    triggerSearch.current = true;
+  };
   const handleSelect = (item: DataSourceType) => {
-    setInputValue(item.value)
-    setShowDropdown(false)
+    setInputValue(item.value);
+    setShowDropdown(false);
     if (onSelect) {
-      onSelect(item)
+      onSelect(item);
     }
-    triggerSearch.current = false
-  }
+    triggerSearch.current = false;
+  };
   const renderTemplate = (item: DataSourceType) => {
-    return renderOption ? renderOption(item) : item.value
-  }
+    return renderOption ? renderOption(item) : item.value;
+  };
   const generateDropdown = () => {
     return (
       <Transition
         in={showDropdown || loading}
         animation="zoom-in-top"
         timeout={300}
-        onExited={() => { setSuggestions([]) }}
+        onExited={() => {
+          setSuggestions([]);
+        }}
       >
         <ul className="suggestion-list">
-          {loading &&
+          {loading && (
             <div className="suggestions-loading-icon">
               <Icon icon="spinner" spin />
             </div>
-          }
+          )}
           {suggestions.map((item, index) => {
             const suggestionClasses = classNames('suggestion-item', {
-              'is-active': index === highlightIndex
-            })
+              'is-active': index === highlightIndex,
+            });
             return (
-              <li key={index} className={suggestionClasses} onClick={() => handleSelect(item)}>
+              <li
+                key={index}
+                className={suggestionClasses}
+                onClick={() => handleSelect(item)}
+              >
                 {renderTemplate(item)}
               </li>
-            )
+            );
           })}
         </ul>
       </Transition>
-    )
-  }
+    );
+  };
   return (
     <div className={classes} ref={componentRef}>
       <Input
@@ -149,7 +166,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
       />
       {generateDropdown()}
     </div>
-  )
-}
+  );
+};
 
 export default AutoComplete;
