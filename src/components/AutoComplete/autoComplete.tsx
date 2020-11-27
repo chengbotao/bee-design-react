@@ -44,6 +44,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
       const results = fetchSuggestions && fetchSuggestions(debouncedValue)
       if (results instanceof Promise) {
         setLoading(true)
+        // tslint:disable-next-line: no-floating-promises
         results.then(data => {
           setLoading(false)
           setSuggestions(data)
@@ -73,7 +74,8 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    switch (e.keyCode || e.code) {
+    // tslint:disable-next-line: deprecation
+    switch (e.keyCode) {
       case 13:
         if (suggestions[highlightIndex]) {
           handleSelect(suggestions[highlightIndex])

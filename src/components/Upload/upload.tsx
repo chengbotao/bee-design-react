@@ -102,6 +102,7 @@ export const Upload: FC<UploadProps> = (props) => {
       } else {
         const result = beforeUpload(file)
         if (result && result instanceof Promise) {
+          // tslint:disable-next-line: no-floating-promises
           result.then((processedFile) => {
             post(processedFile)
           })
