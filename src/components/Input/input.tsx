@@ -1,11 +1,17 @@
-import React, { FC, ReactElement, InputHTMLAttributes, ChangeEvent } from "react";
-import classNames from "classnames";
-import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import Icon from "../Icon/icon";
+import React, {
+  FC,
+  ReactElement,
+  InputHTMLAttributes,
+  ChangeEvent,
+} from 'react';
+import classNames from 'classnames';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import Icon from '../Icon/icon';
 
-type InputSize = "lg" | "sm";
+type InputSize = 'lg' | 'sm';
 
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLElement>, 'size'> {
   /** 是否禁用 Input */
   disabled?: boolean;
   /** 设置 input 大小，支持 lg 或者是 sm */
@@ -20,37 +26,47 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, "size
 }
 
 export const Input: FC<InputProps> = (props) => {
-  const { className, style, disabled, size, icon, prepend, append, ...restProps } = props;
-  const classes = classNames("input-wrapper", className, {
+  const {
+    className,
+    style,
+    disabled,
+    size,
+    icon,
+    prepend,
+    append,
+    ...restProps
+  } = props;
+  const classes = classNames('input-wrapper', className, {
     [`input-size-${size}`]: size,
-    "is-disabled": disabled,
-    "input-group": prepend || append,
-    "input-group-append": !!append,
-    "input-group-prepend": !!prepend
-  })
+    'is-disabled': disabled,
+    'input-group': prepend || append,
+    'input-group-append': !!append,
+    'input-group-prepend': !!prepend,
+  });
 
   const fixControlledValue = (value: any) => {
-    if (typeof value === "undefined" || value === null) {
-      return ""
+    if (typeof value === 'undefined' || value === null) {
+      return '';
     }
-    return value
-  }
-  if ("value" in props) {
-    delete restProps.defaultValue
-    restProps.value = fixControlledValue(props.value)
+    return value;
+  };
+  if ('value' in props) {
+    delete restProps.defaultValue;
+    restProps.value = fixControlledValue(props.value);
   }
 
   return (
     <div className={classes} style={style}>
       {prepend && <div className="input-group-prepend">{prepend}</div>}
-      {icon && <div className="icon-wrapper"><Icon icon={icon} title={`title-${icon}`} /></div>}
-      <input
-        className="input-inner"
-        disabled={disabled}
-        {...restProps} />
+      {icon && (
+        <div className="icon-wrapper">
+          <Icon icon={icon} title={`title-${icon}`} />
+        </div>
+      )}
+      <input className="input-inner" disabled={disabled} {...restProps} />
       {append && <div className="input-group-append">{append}</div>}
     </div>
-  )
-}
+  );
+};
 
 export default Input;

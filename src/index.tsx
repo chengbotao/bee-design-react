@@ -1,5 +1,5 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: Chengbotao
  * @Date: 2020-11-05 14:24:57
  * @LastEditors: Chengbotao
@@ -7,4 +7,4 @@
  * @FilePath: \bee-design-react\src\index.tsx
  */
 
-export { default as Button } from './components/Button'
+export { default as Button } from './components/Button';

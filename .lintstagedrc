@@ -1,8 +1,8 @@
 {
-  "src/**/*.ts": [
+  "src/**/*{.ts,.tsx}": [
     "yarn test",
     "prettier --write",
-    "tslint --fix",
+    "tslint --fix --project ./tsconfig.json",
     "git add"
   ]
 }
