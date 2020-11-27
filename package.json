@@ -9,6 +9,14 @@
   "author": "chengbotao <chengbotao5221@163.com>",
   "license": "MIT",
   "typings": "types/index.d.ts",
+  "keywords": [
+    "Component",
+    "UI",
+    "React"
+  ],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "clean": "rimraf dist",
