@@ -4,7 +4,7 @@
 name: publish bee-design-react
 
 on:
-  pull_request:
+  push:
     branches: 
       - main
 
