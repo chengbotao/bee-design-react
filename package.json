@@ -1,6 +1,6 @@
 {
   "name": "bee-design-react",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "React UI library",
   "main": "dist/bee.common.js",
   "module": "dist/bee.esm.js",
@@ -23,7 +23,7 @@
     "commit": "npx git cz",
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook -o stories_static --no-dll",
-    "test": "npx jest --coverage"
+    "test": "npx jest --passWithNoTests --coverage"
   },
   "peerDependencies": {
     "react": ">=17.0.1",
@@ -44,6 +44,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@storybook/addon-actions": "^6.0.28",
     "@storybook/addon-essentials": "^6.0.28",
@@ -82,6 +83,7 @@
     "rollup": "^2.33.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-postcss": "^3.1.8",
+    "rollup-plugin-scss": "^2.6.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-tslint": "^0.2.2",
     "rollup-plugin-typescript2": "^0.29.0",
