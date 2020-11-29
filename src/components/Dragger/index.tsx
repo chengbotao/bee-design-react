@@ -1,3 +1,3 @@
-import Dragger from "./dragger";
+import Dragger from './dragger';
 
 export default Dragger;

@@ -1,10 +1,20 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: Chengbotao
  * @Date: 2020-11-05 14:24:57
  * @LastEditors: Chengbotao
- * @LastEditTime: 2020-11-09 14:43:08
+ * @LastEditTime: 2020-11-29 23:24:15
  * @FilePath: \bee-design-react\src\index.tsx
  */
 
-export { default as Button } from './components/Button'
+import './styles/index.scss';
+
+export { default as AutoComplete } from './components/AutoComplete';
+export { default as Button } from './components/Button';
+export { default as Dragger } from './components/Dragger';
+export { default as Icon } from './components/Icon';
+export { default as Input } from './components/Input';
+export { default as Menu } from './components/Menu';
+export { default as Progress } from './components/Progress';
+export { default as Transition } from './components/Transition';
+export { default as Upload } from './components/Upload';
