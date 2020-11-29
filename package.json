@@ -1,6 +1,6 @@
 {
   "name": "bee-design-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React UI library",
   "main": "dist/bee.common.js",
   "module": "dist/bee.esm.js",
