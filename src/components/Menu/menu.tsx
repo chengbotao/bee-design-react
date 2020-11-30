@@ -80,6 +80,7 @@ const Menu: FC<MenuProps> = (props) => {
         console.error(
           'Warning: Menu has a child which is not a MenuItem component!'
         );
+        return;
       }
     });
   };

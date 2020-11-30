@@ -75,6 +75,7 @@ const SubMenu: FC<SubMenuProps> = (props) => {
         console.error(
           'Warning: SubMenu has a child which is not a MenuItem component!'
         );
+        return;
       }
     });
     return (
